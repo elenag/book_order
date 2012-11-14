@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CSS3 jQuery style menu</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<style type="text/css">
+
+* { margin:0;
+	padding:0;
+}
+
+html {height: 100%;}
+
+body{
+	position: relative;
+	height: 100%;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#fff));
+
+}
+
+
+#container { 
+	left: 100px; 
+	top:100px;
+	width:50%;
+	height:50%;
+	position:absolute;
+}
+
+div.img
+  {
+  margin:2px;
+  border:1px solid #0000ff;
+  height:auto;
+  width:auto;
+  float:left;
+  text-align:center;
+  }
+div.img img
+  {
+  display:inline;
+  margin:3px;
+  border:1px solid #ffffff;
+  }
+div.img a:hover img
+  {
+  border:1px solid #0000ff;
+  }
+div.desc
+  {
+  text-align:center;
+  font-weight:normal;
+  width:120px;
+  margin:2px;
+  }
+
+a:hover,a:active
+{
+background-color:#7A991A;
+}
+
+.hoverbox a:hover .preview
+{
+	display: block;
+	position: absolute;
+	top: -33px;
+	left: -45px;
+	z-index: 1;
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+<div class="photo">
+	<a href="#">
+		<span></span>
+		<img src="photo.jpg"/>
+	</a>
+</div>
+
+<div id="container">
+
+<div class="img">
+  <a target="_blank" href="klematis_big.htm">
+  <img src="klematis_small.jpg" alt="Klematis" width="110" height="90" />
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+<div class="img">
+  <a target="_blank" href="klematis2_big.htm">
+  <img src="klematis2_small.jpg" alt="Klematis" width="110" height="90" />
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+<div class="img">
+  <a target="_blank" href="klematis3_big.htm">
+  <img src="klematis3_small.jpg" alt="Klematis" width="110" height="90" />
+  </a>
+  <div class="desc">Add a description of the image</div>
+</div>
+<div class="img">
+  <a target="_blank" href="klematis4_big.htm">
+  <img src="klematis4_small.jpg" alt="Klematis" width="110" height="90" />
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+<div class="img">
+  <a target="_blank" href="klematis3_big.htm">
+  <img src="klematis3_small.jpg" alt="Klematis" width="110" height="90" />
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+<div class="img">
+  <a target="_blank" href="klematis4_big.htm">
+  <img src="klematis4_small.jpg" alt="Klematis" width="110" height="90" />
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+
+</div>
+</body>
+</html>

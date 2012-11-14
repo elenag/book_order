@@ -1,0 +1,24 @@
+<!--
+	Params:
+	tb1_lbl = label for text box 1
+	tb1_txt = initial text in text box 1
+	tb2_lbl = label for text box 2
+	tb2_txt = initial text in text box 2
+
+-->
+
+
+<div class = "range_selector">
+	<form name="the_form" action="queryDB" method="post">
+		<fieldset>
+			<legend>Range</legend>
+				<label><%= tb1_lbl%></label>
+				<input type="text" tabindex="1" name="qFrom" value="<%=tb1_txt%>" placeholder="first">
+				<label><%= tb2_lbl%></label>
+	  			<input type="text" tabindex="2" name="qNumRecords" value="<%=tb2_txt%>" placeholder="last">
+			<footer>
+		  		<input type="submit" class="btnLogin" value="Next" tabindex="4">
+			</footer>
+		</fieldset>
+	</form>
+</div>

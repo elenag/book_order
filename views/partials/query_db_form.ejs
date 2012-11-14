@@ -1,0 +1,37 @@
+<!--
+	Params:
+	tb1_lbl = label for text box 1
+	tb1_txt = initial text in text box 1
+	tb2_lbl = label for text box 2
+	tb2_txt = initial text in text box 2
+
+-->
+<head>
+<style>
+.box.login
+{
+	height:260px;
+    width:332px;
+	position:absolute;
+	left:100%;
+	top:0%;
+	margin:<%=pos.y%>px 0 0 <%=pos.x%>px;
+}
+</style>
+</head>
+
+<div class="box login">
+	<form name="xxx" action="queryDB" method="post">
+		<fieldset class="boxBody">
+			<!--legend>Filter</legend-->
+				<label><%= tb1_lbl%></label>
+				<input type="text" tabindex="1" name="qTitle" value="<%=tb1_txt%>" placeholder="Book Title">
+				<label><%= tb2_lbl%></label>
+	  			<input type="text" tabindex="2" name="qAuthor" value="<%=tb2_txt%>" placeholder="Author Name">
+			<footer>
+				<label><input type="checkbox" tabindex="3"></label>
+		  		<input type="submit" class="btnLogin" value="Search" tabindex="4">
+			</footer>
+		</fieldset>
+	</form>
+</div>

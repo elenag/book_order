@@ -1,0 +1,84 @@
+<!--
+	Params:
+	className 	= main div class
+	data 		= data returned by the SQL query
+	range 		= data range { .fisrt, .number }
+
+-->
+
+<head>
+
+<style>
+#gallery-container { 
+	left: 150px; 
+	top:100px;
+	width:50%;
+	height:50%;
+	position:absolute;
+}
+div.book-cover
+  {
+ /* background-color:#ff00ff; */
+  margin:5px;
+  border:0px solid #0000ff;
+  height:auto;
+  width:auto;
+  float:left;
+  text-align:center;
+/*  	-webkit-border-top-right-radius: 10px;
+ 	-webkit-border-bottom-right-radius: 10px;
+ 		-webkit-border-top-left-radius: 10px;
+ 	-webkit-border-bottom-left-radius: 10px;*/
+
+  }
+div.book-cover img
+  {
+  display:inline;
+  margin:3px;
+  border:1px solid #ffffff;
+  height:100px;
+  width:100px;
+    	-webkit-border-top-right-radius: 10px;
+ 	-webkit-border-bottom-right-radius: 10px;
+ 		-webkit-border-top-left-radius: 10px;
+ 	-webkit-border-bottom-left-radius: 10px;
+  }
+
+div.book-cover:hover
+  {
+  border:1px solid #ffffff;
+  background-color:#ffffff;
+/*  height:110px;
+  width:110px;*/
+      	-webkit-border-top-right-radius: 0px;
+ 	-webkit-border-bottom-right-radius: 0px;
+ 		-webkit-border-top-left-radius: 0px;
+ 	-webkit-border-bottom-left-radius: 0px;
+  }
+div.book-cover.desc
+  {
+  text-align:center;
+  font-weight:normal;
+  width:120px;
+  margin:2px;
+  }
+</style>
+<script LANGUAGE="JavaScript">
+    function ClickAction(v) {
+      alert('Src : ' + v);
+    }
+  </script>
+</head>
+
+<body>
+  <div id="gallery-container">
+  	<% params.data.forEach( function(t) { %>
+  		<div class="book-cover">
+  			<a href="#" onClick="ClickAction('<%=t %>')">
+  				<span></span>
+  				<img src="<%=t %>"/>
+  			</a>
+  		</div>
+  	<%} ); %>
+  </div>
+</body>

@@ -1,0 +1,78 @@
+<!--
+	Params:
+	x_offset = label for text box 1
+	y_offset = initial text in text box 1
+	menu_data = label for text box 2
+-->
+<style type="text/css">
+
+* { margin:0;
+	padding:0;
+}
+
+html {height: 100%;}
+
+body{
+	position: relative;
+	height: 100%;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#fff));
+
+}
+
+.navbox {
+	position: relative;
+	float: left;
+}
+
+ul.nav {
+	list-style: none;
+	display: block;
+	width: <%=params.pos.width %>;
+	position: relative;
+	top: <%=params.pos.top %>;
+	left: <%=params.pos.left %>;
+	padding: 60px 0 60px 0;
+	background: url(../img/menu-images/shad2.png) no-repeat;
+	-webkit-background-size: 50% 100%;
+}
+
+li {
+	margin: 5px 0 0 0;
+}
+
+ul.nav li a {
+	-webkit-transition: all 0.3s ease-out;
+	background: #cbcbcb url(../img/menu-images/border.png) no-repeat;
+	color: #174867;
+	padding: 7px 15px 7px 15px;
+	-webkit-border-top-right-radius: 10px;
+ 	-webkit-border-bottom-right-radius: 10px;
+	width: 75px;
+	display: block;
+	text-decoration: none;
+	-webkit-box-shadow: 2px 2px 4px #888;
+}
+
+ul.nav li a:hover {
+	background: #ebebeb url(../img/menu-images/border.png) no-repeat;
+	color: #67a5cd;
+	padding: 7px 15px 7px 30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbox">
+<ul class="nav">
+
+<% params.menu_data.forEach(function(t) { %>
+	<li><a href="<%=t.href %>"><%=t.text %></a></li>
+<%})%>
+</ul>
+</div>
+
+</body>
+</html>

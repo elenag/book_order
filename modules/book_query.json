@@ -1,0 +1,65 @@
+{
+	"select" : [
+	{
+		"table"		: "books",
+		"name" 		: "id",
+		"display"	: "",
+		"type"		: "hide",
+		"uniqueId"	: "true"
+	},
+	{
+		"table"		: "books",
+		"name" 		: "url",
+		"display"	: "",
+		"type"		: "hide"
+	},
+	{
+		"table"		: "authors",
+		"name" 		: "name",
+		"display"	: "Author",
+		"type"		: ""
+	},
+	{
+		"table"		: "books",
+		"name" 		: "title",
+		"display"	: "Title",
+		"type"		: "",
+		"url"		: "books.url"
+	},
+	{
+		"table"		: "books",
+		"name" 		: "description",
+		"display"	: "Desc.",
+		"type"		: ""
+	},
+	{
+		"table"		: "books",
+		"name" 		: "cover",
+		"display"	: "Cover",
+		"type"		: "img",
+		"url"		: "books.url"
+	},
+	{
+		"table"		: "books",
+		"name" 		: "push_bucket_1",
+		"display"	: "Push BK 1",
+		"type"		: "checkbox"
+	},
+	{
+		"table"		: "books",
+		"name" 		: "push_bucket_2",
+		"display"	: "Push BK 2",
+		"type"		: "checkbox"
+	}],
+
+	"where" : [
+	{ "eq" : "books.author_id = authors.id"},
+	{ "eq" : "authors.name = %%_author"},
+	{ "eq" : "books.title = %%_title"}
+	],
+
+	"limit" : {
+		"from" : 0,
+		"count" : 0
+	}
+}

@@ -1,0 +1,78 @@
+<!--
+	Params:
+	filters			= Array of filters (e.g. [title, author])
+	queryResult 	= Data (results) returned by the SQL query
+	fields 		= array of column names as described in the DB
+	//headings 	= array of column names to be displayed at the heading of the table (for DB entries)
+	range 		= data range { .fisrt, .number }
+
+
+ { tbTitle: qTitle, tbAuthor: qAuthor, title: "test", data: qRes, fields: qFields, headings: transFields, range: range });
+-->
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Books Browser</title>
+	<meta charset="UTF-8" />
+
+	<style>
+		#divContainer {
+			width:100%;
+			height:100%;
+		}
+		#divHeader {
+			height:50px;
+		}
+		#divMenu {
+			width:120px;
+			float:left;
+		}
+		#divContent {
+			//width:70%;
+			float:left;
+		}
+		#divRange {
+		}
+	</style>
+
+</head>
+
+<body>
+
+<footer id="main">
+  <a href="http://wwww.cssjunction.com">This is a footer</a> | <a href="http://www.premiumpixels.com">Dario obicha Eli</a>
+</footer>
+<div id="divContainer">
+	<div id="divHeader">
+	</div>
+	<div id="divMenu">
+			<!-- TABLE VIEW: Fields, Data, Range -->
+		<%- partial('partials/left_menu.ejs', params = { menu_data : [{ text : 'Extranet Home', href: '#'}, {text : 'Worldreader Home', href:'#'},{ text : 'Blog', href: '#'}, { text : 'Partners', href: '#'}],
+			pos : {top: '0px', left:'2px', width: '120px'}})%>
+	</div>
+
+	<div id="divContent">
+		<!--form method="POST" action="queryDb?qFrom=2,qTitle=<%=params.tblResultsTitle%>"> <input type="submit" value="Submit"> </form-->
+
+		<!-- TABLE VIEW: Fields, Data, Range -->
+		<%- partial('partials/table.ejs', params = { 	className: 'cool', 
+														fields:fields, data: queryResult, 
+														range: range,
+														pos: {'x': 10, 'y': 50} }) %>
+	</div>
+	<div id="divRange">
+			<!--form method="POST" action="queryDb?qFrom=2,qTitle=<%=params.tblResultsTitle%>"> <input type="submit" value="Submit"> </form-->
+
+			<!-- RANGE SELECTOR: From , Count -->
+			<%- partial('partials/range_selector.ejs', {tb1_lbl: 'From:', tb1_txt: range.first, tb2_lbl: 'Ammount:',tb2_txt: range.number }) %>
+	</div>
+	<div id="divFfilter">
+		<!-- FILTER: Author , Title -->
+		<%- partial('partials/query_db_form.ejs', { tb1_lbl: 'Title', tb1_txt: params.filters[0], 
+													tb2_lbl: 'Author',tb2_txt: params.filters[1],
+													pos: {'x': -350, 'y': 112} }) %>
+	</div>
+</div>

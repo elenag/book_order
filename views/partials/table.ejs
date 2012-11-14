@@ -1,0 +1,140 @@
+<!--
+	Params:
+	className 	= main div class
+	fields 		= array of fields as returned by DB (full info)
+	data 		= data returned by the SQL query
+	range 		= data range { .fisrt, .number }
+
+-->
+
+<head>
+		<!--link rel="stylesheet" type="text/css" href="css/reset.css"-->
+	<link rel="stylesheet" type="text/css" href="css/structure.css">
+	<link rel="stylesheet" type="text/css" href="css/tables_style.css">
+<style>
+#box-table-a
+{
+	//float: left;
+	//height:100%;
+    width:100%;
+    margin:0;
+	//position:absolute;
+	//left:0%;
+	//top:0%;
+	//margin:<%=pos.y%>px 0 0 <%=pos.x%>px;
+}
+
+</style>
+</head>
+
+<div class = "table_data <%=className%>">
+	<table id="box-table-a" summary="Book Selection">
+	    <thead>
+	    	<tr>
+	    		<% params.fields.forEach( function(f) { %>
+	    			<% if (f.tableElemType != 'hide') {%>
+	    				<th scope="col"><%=f.name%></th>
+	    			<%} %>
+	    		<%} ); %>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    	<form name="form_checkbox" action="queryDB" method="post">
+			<fieldset>
+	    		<% params.data.forEach(function(row) { %>
+		    		<% console.log("ROW:"); console.log(row); %>
+		    		
+		    		<%
+		    			// obtain unique id to label chechbox acordingly
+		    			var uniqueId = 0;
+		    			var uniqueIdField = '';
+		    			var uniqueIdTable = '';
+
+		    			var urlKey = '';
+
+		    			params.fields.forEach(function(field) {
+		    				if (field.__uniqueId === 1) {
+		    					uniqueIdField = field.orgName;
+		    					//console.log(uniqueIdField);
+		    					uniqueId = row[uniqueIdField];
+		    					//console.log(uniqueId);
+		    					uniqueIdTable = field.table;
+		    				}
+
+		    				// obtain urlKey (if any)
+
+		    				if (typeof(field.__url) != 'undefined') {
+		    					// Find the field with the url
+		    					var tokens = (field.__url).split('.');
+		    					if (tokens.length === 2) {
+			    					urlKey = tokens[1];
+		    					}
+	    					}
+		    			});
+		    		%>
+
+		    		<tr>
+			    		<% params.fields.forEach(function(field) { %>
+			    			<% console.log("COL:");
+		    					console.log(field); %>
+		    				<% 
+		    					// Has URL link this field?
+		    					var addUrlLink = (typeof(field.__url) != 'undefined' && urlKey.length > 0 && row[urlKey].length > 0 );
+		    				%>
+		    			
+		    				<% if (field.tableElemType != 'hide') {%>
+					    		<% if (field.tableElemType==='img') { %>
+					    			<td>
+					    				<% if (addUrlLink) { %>
+					    					<a href="<%=row[urlKey] %>">
+					    				<%}%>
+					    					<img src="./img/data/<%= row[field.orgName] %>" alt=<%=row[field.orgName]%> align="middle" width=64></img>
+					    				<% if (addUrlLink) {%>
+					    					</a>
+					    				<%}%>
+					    			</td>
+					        	<% } else if (field.tableElemType === 'checkbox') { %>
+					        		<td>
+					        			<% if (row[field.orgName] === 1) { %>
+					        				<!-- Selected checkbox -->
+					        				<input type="checkbox" name="qCheckbox!<%=field.table%>!<%=field.orgName%>!<%=uniqueIdTable %>!<%=uniqueIdField %>!<%= uniqueId%>" class="table-select" title="TitleSelect" checked>
+					        				<!-- Cool Trick: Add hidden check box to see later (server side) if it has been unchecked -->
+					        				<input type="hidden" name="HIDDEN!qCheckbox!<%=field.table%>!<%=field.orgName%>!<%=uniqueIdTable %>!<%=uniqueIdField %>!<%= uniqueId%>" class="table-select" title="hidden1" checked>
+					        			<% } else { %> 
+					        				<!-- Unselected checkbox -->
+					        				<input type="checkbox" name="qCheckbox!<%=field.table%>!<%=field.orgName%>!<%=uniqueIdTable %>!<%=uniqueIdField %>!<%= uniqueId%>" class="table-select" title="unselected" >
+					        				<!-- No hidden needed here -->
+					        			<% } %>
+					        		</td>
+					        	<% } else { %>
+		      						<td>
+		      							<!-- Normal data -->
+		      							<% if (addUrlLink) { %>
+					    					<a href="<%=row[urlKey] %>">
+					    				<%}%>
+		      								<%=row[field.orgName]%>
+		      							<% if (addUrlLink) {%>
+					    					</a>
+					    				<%}%>
+		      						</td>
+					        	<%}
+					        }
+			            }); %>
+		             </tr>
+	            <%}); %>
+	        <footer>
+	        	<input type="" name="qFrom" class="xxx" value="<%=range.first%>" >
+	        	<input type="hidden" name="qTo" class="xxx" value="<%=range.number%>" >
+	        	<input type="hidden" name="pAction" class="xxx" value="true" >
+		  		<input type="submit" class="btnApply" value="Apply" tabindex="4">
+			</footer>
+           	</fieldset>
+			</form>
+	    </tbody>
+	    <tfoot>
+	    	<% if (params.data.length === 0) { %>
+	    		<p <b>No item matched the search criteria</b> </p>
+	    	<%}%>
+	    </tfoot>
+	</table>
+</div>

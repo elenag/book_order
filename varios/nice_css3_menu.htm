@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CSS3 jQuery style menu</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<style type="text/css">
+
+* { margin:0;
+	padding:0;
+}
+
+html {height: 100%;}
+
+body{
+	position: relative;
+	height: 100%;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#fff));
+
+}
+
+.navbox {
+	position: relative;
+	float: left;
+}
+
+ul.nav {
+	list-style: none;
+	display: block;
+	width: 100px;
+	position: relative;
+	top: 100px;
+	left: 2px;
+	padding: 60px 0 60px 0;
+	background: url(shad2.png) no-repeat;
+	-webkit-background-size: 50% 100%;
+}
+
+li {
+	margin: 5px 0 0 0;
+}
+
+ul.nav li a {
+	-webkit-transition: all 0.3s ease-out;
+	background: #cbcbcb url(border.png) no-repeat;
+	color: #174867;
+	padding: 7px 15px 7px 15px;
+	-webkit-border-top-right-radius: 10px;
+ 	-webkit-border-bottom-right-radius: 10px;
+	width: 75px;
+	display: block;
+	text-decoration: none;
+	-webkit-box-shadow: 2px 2px 4px #888;
+}
+
+ul.nav li a:hover {
+	background: #ebebeb url(border.png) no-repeat;
+	color: #67a5cd;
+	padding: 7px 15px 7px 30px;
+}
+
+.table_div {
+	left: 300px;
+	top: 100px;
+	display:block;
+	position: absolute;
+}
+
+ul.table {
+	top : 0px;
+	position:relative;
+	display:inline;
+	list-style-type:none;
+}
+
+li img thumb c1  { left: 0px; }
+li img thumb c2  { left: 550px; }
+#a2 { left: 450px; }
+
+
+
+div.img
+  {
+  margin:2px;
+  border:1px solid #0000ff;
+  height:auto;
+  width:auto;
+  float:left;
+  text-align:center;
+  }
+div.img img
+  {
+  display:inline;
+  margin:3px;
+  border:1px solid #ffffff;
+  }
+div.img a:hover img
+  {
+  border:1px solid #0000ff;
+  }
+div.desc
+  {
+  text-align:center;
+  font-weight:normal;
+  width:120px;
+  margin:2px;
+  }
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbox">
+<ul class="nav">
+<li><a href="#">Home</a></li>
+<li><a href="#"><img title="Worldreader Home" src='wr_logo.png'/></a></li>
+<li><a title="Worldreader Blog" href="#">Blog</a></li>
+<li><a href="#">Partners</a></li>
+</ul>
+</div>
+
+<div class="table_div">
+<ul class="table">
+<li>
+	<img class="thumb c1" src="http://www.newyorker.com/images/flash/2009/12/07/worldleaders/thumbs/MAbbas_Palestine.jpg" alt="Mahmoud Abbas, President of Palestinian Authority"></img>
+</li>
+<li id="a2">
+	<img class="thumb c2" src="http://www.newyorker.com/images/flash/2009/12/07/worldleaders/thumbs/MAhmadinejad_Iran.jpg" alt="Mahmoud Ahmadinejad, President of Iran"></img>
+</li>
+<li>
+	<img class="thumb c1" src="http://www.newyorker.com/images/flash/2009/12/07/worldleaders/thumbs/HChavez_Venezuela.jpg" alt="Hugo Chávez, President of Venezuela"></img>
+</li>
+<li>
+	<img class="thumb c2" src="http://www.newyorker.com/images/flash/2009/12/07/worldleaders/thumbs/ACaballeros_Guatemala.jpg" alt="Álvaro Colom, President of Guatemala"></img>
+</li>
+</div>
+</li>
+</ul>
+</div>
+
+
+<div class="img">
+  <a target="_blank" href="klematis_big.htm">
+  <img src="klematis_small.jpg" alt="Klematis" width="110" height="90" />
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+<div class="img">
+  <a target="_blank" href="klematis2_big.htm">
+  <img src="klematis2_small.jpg" alt="Klematis" width="110" height="90" />
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+<div class="img">
+  <a target="_blank" href="klematis3_big.htm">
+  <img src="klematis3_small.jpg" alt="Klematis" width="110" height="90" />
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+<div class="img">
+  <a target="_blank" href="klematis4_big.htm">
+  <img src="klematis4_small.jpg" alt="Klematis" width="110" height="90" />
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+</body>
+</html>
