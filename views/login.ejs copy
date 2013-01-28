@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Login</title>
+<meta charset="UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+<link rel="stylesheet" type="text/css" href="css/structure.css">
+<style>
+#boxLogin
+{
+	height:260px;
+    width:332px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:<%=pos.y%>px 0 0 <%=pos.x%>px;
+/*	-webkit-border-top-right-radius: 30px;
+ 	-webkit-border-bottom-right-radius: 30px;
+ 	-webkit-border-top-left-radius: 1em;
+ 	-webkit-border-bottom-left-radius: 2em;*/
+}
+#divHeader {
+			height:50px;
+			margin: 10px;
+		}
+</style>
+</head>
+
+<body>
+
+<div id="divContainer">
+	<div id="divHeader">
+		<img title="Worldreader" src="/img/header/wr_full_logo.png">
+	</div>
+	<div class="main-text">
+		<h1>Welcome to the Worldreader Partner Extranet</h1>
+		<p>
+			The extranet is for established partners of
+			Worldreader who have projects with us. If
+			you’d like to learn about becoming a
+			partner click here.
+		</p>
+
+		<p>
+			If you are a new partner and don’t yet have
+			your login and password please email
+			partners@worldreader.org to request these.
+		</p>
+	</div>
+	<div id="divMenu">
+			<!-- TABLE VIEW: Fields, Data, Range -->
+		<%- partial('partials/left_menu.ejs', params = { menu_data : [{ text : 'Forgotten Password', href: '/passfgt'}, {text : 'Worldreader Home', href:'http://www.worldreader.com'}]})%>
+	</div>
+</div>
+<form id="boxLogin" method="POST" action="/login">
+	<fieldset class="boxBody">
+	  <label>Username</label>
+	  <input type="text" tabindex="1" name="user" placeholder="Type your username" required>
+	  <label><a href="#" class="rLink" tabindex="5">Forget your password?</a>Password</label>
+	  <input type="password" name="password" tabindex="2" required>
+	</fieldset>
+	<footer>
+	  <label><a href="#">Forgotten Your Password?</a></label>
+	  <input type="submit" class="btnLogin" value="Login" tabindex="4">
+	</footer>
+</form>
+<footer id="main">
+	<% console.log(msg) %>
+	<% if (msg.length > 0) { %>
+		<%-msg%>
+	<%}%>
+</footer>
+</body>
+</html>

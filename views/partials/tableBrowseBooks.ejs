@@ -1,0 +1,93 @@
+<!--
+	Params:
+	className 	= main div class
+	fields 		= array of fields as returned by DB (full info)
+	data 		= Data (results) returned by the SQL query
+		.cover : cover image
+		.asin  : book asin
+		.title : book title
+		.author: author names
+	range 		= data range { .fisrt, .number }
+
+-->
+
+<head>
+		<!--link rel="stylesheet" type="text/css" href="css/reset.css"-->
+	<link rel="stylesheet" type="text/css" href="css/structure.css">
+	<link rel="stylesheet" type="text/css" href="css/tables_style.css">
+<style>
+#box-table-a
+{
+	//float: left;
+	//height:100%;
+    width:100%;
+    margin:0;
+	//position:absolute;
+	//left:0%;
+	//top:0%;
+	//margin:<%=pos.y%>px 0 0 <%=pos.x%>px;
+}
+
+</style>
+</head>
+
+<div class = "table_data <%=className%>">
+	<table id="box-table-a" summary="Book Selection">
+	    <thead>
+	    	<tr>Cover</tr>
+	    	<tr>Information</tr>
+	    	<tr>Orders</tr>
+	    </thead>
+	    <tbody>
+	    	<form name="FORM_BROWSEBOOKS" action="XXXXX" method="post">
+			<fieldset>
+	    		<% params.data.forEach(function(row) { 
+		    		//console.log("ROW:"); console.log(row); 
+		    	%>
+		    		<tr>
+		    			
+			    		<!--% params.fields.forEach(function(field) { 
+			    			console.log("COL:"); console.log(field); %-->
+
+			    		<!-- First Column: Cover Image -->
+			    		<td>
+			    			<dl>
+			    			<dt>
+						    	<a href="www.amazon.com">
+						    		<img src="http://farm4.staticflickr.com/3209/2720524596_538ddecec7_m.jpg" alt="<%=row.books.title%>" align="middle" width=64></img>
+						    	</a>
+						    </dt>
+						    <dt>
+						    	<%=row.books.asin%>
+						    </dt>
+						</dl>
+		    			</td>
+		    			<!-- Second Column: Information (title, author, etc) -->
+		    			<td>
+		    				<ul>
+								<li>Title: <%=row.books.title%></li>
+								<li>Author: <%=row.authors.name%></li>
+							</ul>
+		    			</td>
+		    			<!-- Third Column: Content Buckets (TODO) -->
+		    			<td>
+		    				
+		    			</td>
+		             </tr>
+	            <%}); %>
+	        <footer>
+	        	<input type="" name="qFrom" class="xxx" value="<%=range.first%>" >
+	        	<input type="hidden" name="qTo" class="xxx" value="<%=range.number%>" >
+	        	<input type="hidden" name="pAction" class="xxx" value="true" >
+		  		<input type="submit" class="btnApply" value="Apply" tabindex="4">
+			</footer>
+           	</fieldset>
+			</form>
+	    </tbody>
+	    <tfoot>
+	    	<% if (params.data.length === 0) { %>
+	    		<p <b>No item matched the search criteria</b> </p>
+	    	<%}%>
+	    </tfoot>
+	</table>
+</div>

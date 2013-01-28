@@ -1,0 +1,123 @@
+<!--
+	Params:
+	filters			= Array of filters (e.g. [title, author])
+	queryResult 	= Data (results) returned by the SQL query
+	fields 		= array of column names as described in the DB
+	//headings 	= array of column names to be displayed at the heading of the table (for DB entries)
+	range 		= data range { .fisrt, .number }
+
+
+ { tbTitle: qTitle, tbAuthor: qAuthor, title: "test", data: qRes, fields: qFields, headings: transFields, range: range });
+-->
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>APP Books Browser</title>
+	<meta charset="UTF-8" />
+
+	<style>
+		#divContainer {
+			width:100%;
+			height:100%;
+		}
+		#divHeader {
+			height:50px;
+		}
+		#divMenu {
+			width:120px;
+			float:left;
+		}
+		#divContent {
+			//width:70%;
+			float: middle;
+		}
+		#divRange {
+		}
+	</style>
+	<script LANGUAGE="JavaScript">
+		function fTest(v) {
+			alert('Dario : ' + v);
+		}
+	</script>
+</head>
+
+<body>
+<div id="divContainer">
+	<div id="divHeader">
+		<div id="divLogo">
+			<img title="Worldreader" src="/img/header/wr_full_logo.png">
+		</div>
+		
+		<div id = "divBackLinks">
+			<table>
+			<tr>
+				<td><a href="www.worldreader.org">Worldreader Website</a></td>
+				<td><a href="www.worldreader.org">Go Back to Portal</a></td>
+				<td><a href="www.worldreader.org">Log out</a></td>
+			</tr>
+			</table>
+		</div>
+	</div>
+
+	<h1>Browse Our Books</h1>
+
+	<div id="divBooksBrowse">
+		<div id="divSearchBar">
+
+			<FORM>
+				<INPUT NAME="text1" TYPE=Text size="100" position="center" placeholder="Search..." />
+				<INPUT NAME="submit" TYPE=Button VALUE="Go" onClick="fTest(form.text1.value)">
+				<br><br>
+
+				<select name="price">
+	  			<option value="free">Free</option>
+	  			<option value="paid">Paid</option>
+				</select>
+				<select name="Country">
+					<% console.log("====== params ====================") %>
+					<% console.log(par) %>
+					<% par.filters.origins.forEach( function(f) { %>
+	  				<option value="a"><%=f.name%></option>
+	  				<%} ); %>
+				</select>
+				<select name="Language">
+					<% console.log("====== params ====================") %>
+					<% console.log(par) %>
+					<% par.filters.lang.forEach( function(f) { %>
+	  				<option value="a"><%=f.name%></option>
+	  	<%} ); %>
+				</select>
+
+				<select name="Levels">
+					<% console.log("====== params ====================") %>
+					<% console.log(par) %>
+					<% par.filters.levels.forEach( function(f) { %>
+	  				<option value="a"><%=f.name%></option>
+	  	<%} ); %>
+				</select>
+			</FORM>
+		</div>
+	
+	</div>
+	
+
+	<div id="divMenu">
+			<!-- TABLE VIEW: Fields, Data, Range -->
+		<%- partial('partials/left_menu.ejs', params = { menu_data : [{ text : 'Extranet Home', href: '#'}, {text : 'Worldreader Home', href:'#'},{ text : 'Blog', href: '#'}, { text : 'Partners', href: '#'}],
+			pos : {top: '0px', left:'2px', width: '120px'}})%>
+	</div>
+
+	<div id="divContent">
+		<!-- TABLE VIEW: Fields, Data, Range -->
+		<!-- %- partial('partials/gallery.ejs', params = { 	className: 'cool', 
+														data: data, 
+														pos: {'x': 10, 'y': 50} }) % -->
+	</div>
+
+	
+</div>
+</body>
+</html>

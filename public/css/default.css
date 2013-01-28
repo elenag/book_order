@@ -13,37 +13,57 @@ html {
 	margin: 0;
 	padding: 0;
 	}
-body { 
-	font: 75% georgia, sans-serif;
-	line-height: 1.88889;
-	color: #555753; 
-	background: #eff3f6; /*url(blossoms.jpg) no-repeat bottom right*/;
-	margin: 0; 
-	padding: 0;
-	}
+
+body {
+    background-color: white;
+    color: #6c6c6c;
+	font: 13px 'Helvetica Neue', 'Helvetica', Arial,sans-serif; 
+	font-weight: 400; 
+} 
+
+aside {
+	display: block;
+}
+
 p { 
 	margin-top: 0; 
 	text-align: justify;
 	}
+
+h1 { 
+	font-family: 'Helvetica Neue', 'Helvetica', Arial,sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: 1px; 
+	margin-bottom: 0; 
+	color: #05f;
+	padding: 30px;
+	}
+
 h3 { 
 	font: italic normal 1.4em georgia, sans-serif;
 	letter-spacing: 1px; 
 	margin-bottom: 0; 
 	color: #7D775C;
 	}
+a {
+	font: 16px 'Helvetica Neue', 'Helvetica', Arial,sans-serif; 
+	color: #0066ff;
+}
 a:link { 
-	font-weight: bold; 
+	font-weight: normal; 
+	font-size: 0.8em;
 	text-decoration: none; 
-	color: #B7A5DF;
+	color: #000fbc;
 	}
 a:visited { 
 	font-weight: bold; 
 	text-decoration: none; 
-	color: #D4CDDC;
+	color: #003fbc;
 	}
 a:hover, a:active { 
 	text-decoration: underline; 
-	color: #9685BA;
+	color: #003fbc;
 	}
 acronym {
 	border-bottom: none;
@@ -51,6 +71,68 @@ acronym {
 
 
 /* specific divs */
+
+#divContainer {
+	background-color: white;
+}
+
+#divHeader {
+	height:50px;
+	margin-left:10px;
+	margin-right:50px;
+	margin-top:10px;
+	margin-bottom: 15px;
+	color: navy;
+}
+#divBackLinks{
+	float: right;
+}
+
+#divLogo {
+	float: left;
+}
+
+#divBackLinks table
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	background: #fff;
+	width: 300px;
+	border-collapse: collapse;
+	text-align: left;
+}
+
+#divBackLinks table td
+{
+	padding: 9px 8px 0px 8px;
+}
+
+#divSearchBar
+{
+	height:50px;
+	margin-left:200px;
+	margin-right:50px;
+	margin-top:10px;
+}
+
+#divPageTitle{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #container { 
 	background: url(zen-bg.jpg) no-repeat top left; 
 	padding: 0 175px 0 110px;  

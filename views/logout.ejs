@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Login</title>
+<meta charset="UTF-8" />
+
+<link rel="stylesheet" type="text/css" href="css/default.css">
+<style>
+.box.login
+{
+	height:260px;
+    width:332px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:0px 0 0 0px;
+}
+.boxBody
+{
+    background:#ffffff;
+    border-top:1px solid #dde0e8;
+    border-bottom:1px solid #dde0e8;
+    padding:10px 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="divContainer">
+	<div id="divHeader">
+		<div id="divLogo">
+			<img title="Worldreader" src="/img/header/wr_full_logo.png">
+		</div>
+		
+		<div id = "divBackLinks">
+			<table>
+			<tr>
+				<td><a href="www.worldreader.org">Worldreader Website</a></td>
+				<td><a href='portal'>Go Back to Portal</a></td>
+				<td><a href="www.worldreader.org">Log out</a></td>
+			</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="main-text">
+		<h1>Welcome to the Worldreader Partner Extranet</h1>
+		<p>
+			The extranet is for established partners of
+			Worldreader who have projects with us. If
+			you’d like to learn about becoming a
+			partner click here.
+		</p>
+
+		<p>
+			If you are a new partner and don’t yet have
+			your login and password please email
+			partners@worldreader.org to request these.
+		</p>
+	</div>
+	<div id="divMenu">
+			<!-- TABLE VIEW: Fields, Data, Range -->
+		<%- partial('partials/left_menu.ejs', params = { menu_data : [{ text : 'Forgotten Password', href: '/passfgt'}, {text : 'Worldreader Home', href:'http://www.worldreader.com'}]})%>
+	</div>
+</div>
+
+<form class="box login" method="POST" action="/login">
+	<fieldset class="boxBody">
+	  <label>Username</label>
+	  <input type="text" tabindex="1" name="user" placeholder="Type your username" required><br>
+	  <label>Password</label>
+	  <input type="password" name="password" tabindex="2" required><br>
+	</fieldset>
+	<footer>
+	  <label><a href='/passfgt'>Forgotten Your Password?</a></label>
+	  <input type="submit" class="btnLogin" value="Login" tabindex="4">
+	</footer>
+</form>
+</aside>
+<footer id="main">
+	<% console.log(msg) %>
+	<% if (msg.length > 0) { %>
+		<%-msg%>
+	<%}%>
+</footer>
+</body>
+</html>

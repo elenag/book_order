@@ -11,11 +11,11 @@
   
 */
 body{
-  background:#eff3f6;
+  background:#ffffff;
 }
 .box
 {
-    background:#fefefe;
+    background:#ffffff;
     border: 1px solid #C3D4DB;
 	border-top:1px;
     -webkit-border-radius:5px;
@@ -40,7 +40,7 @@ body{
 }
 .boxBody
 {
-    background:#fefefe;
+    background:#ffffff;
     border-top:1px solid #dde0e8;
     border-bottom:1px solid #dde0e8;
     padding:10px 20px;

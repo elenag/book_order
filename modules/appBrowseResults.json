@@ -1,0 +1,49 @@
+{
+	"select" : [
+	{
+		"table"		: "books",
+		"name" 		: "title",
+		"display"	: "Title",
+		"type"		: "",
+		"url"		: ""
+	},
+	{
+		"table"		: "publishers",
+		"name" 		: "name",
+		"display"	: "Publisher",
+		"type"		: ""
+	},
+	{
+		"table"		: "origins",
+		"name" 		: "name",
+		"display"	: "Country",
+		"type"		: ""
+	},
+	{
+		"table"		: "read_levels",
+		"name" 		: "name",
+		"display"	: "Reading Level",
+		"type"		: ""
+	},
+	{
+		"table"		: "languages",
+		"name" 		: "name",
+		"display"	: "Language",
+		"type"		: "",
+		"url"		: ""
+	}],
+
+	"where" : [
+	{ "eq" : "books.origin_id = origins.id"},
+	{ "eq" : "books.publisher_id = publishers.id"},
+	{ "eq" : "books.read_level_id = read_levels.id"},
+	{ "eq" : "books.language_id = languages.id"},
+	{ "eq" : "languages.name = %%_lang"},
+	{ "eq" : "origins.name = %%_origin"}
+	],
+
+	"limit" : {
+		"from" : 0,
+		"count" : 0
+	}
+}

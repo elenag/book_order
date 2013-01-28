@@ -14,27 +14,27 @@ exports.checkLogin = function(user, pass, callback) {
 		password: ''
 	});
 
-	connection.query('USE books_db');
+	var mLocalSettings = require('../local_settings/localSettings');
+	connection.query('USE ' + mLocalSettings.GetNameDB());
 
 	// request the seleted user
-	connection.query("SELECT * from users", 
+	var query = "SELECT * FROM admin_users WHERE email='" + user + "' AND encrypted_password='" + pass+"'";
+	console.log(query);
+	connection.query(query, 
     function(err, results, fields) {
 		console.log(results);
 		//console.log(fields);
 		if (err) throw err;
 
 		if (results.length == 0) {
-			console.log("Could not find user: " + user);
-			callback(0, "CB: Could not find user: " + user);
-		} else if (results[0].user === user && results[0].password === pass) {
-			console.log("User " + user + " has been authenticated.");
-			callback(1, "CB: User " + user + " has been authenticated");
+			console.log("Could not find user/password match: " + user + "/" + pass);
+			callback(0, "CB: Could not find user/password match: " + user + "/" + pass);
 		}
-		else
-		{
-			console.log("Wrong pass: " + pass);
-			callback(2, "CB: Wrong pass: " + pass);
+		else {
+			console.log("Login successful for user: " + user);
+			callback(1, "CB: Login successful for user: " + user);
 		}
+		return;
       }
 	);
 };
@@ -51,7 +51,8 @@ exports.sendPassword = function(email, res, callback) {
 		password: ''
 	});
 
-	connection.query('USE books_db');
+	var mLocalSettings = require('../local_settings/localSettings');
+	connection.query('USE ' + mLocalSettings.GetNameDB());
 
 	var theEmail = email;
 	// request the seleted user
@@ -130,7 +131,9 @@ exports.updateBooks = function(changes, callback) {
 		password: ''
 	});
 
-	connection.query('USE books_db');
+	var mLocalSettings = require('../local_settings/localSettings');
+	connection.query('USE ' + mLocalSettings.GetNameDB());
+
 	var syncCnt = changes.length;
     changes.forEach(function(change){
     	var UPDATE_STR = 	'UPDATE ' + change.table + 
@@ -287,7 +290,8 @@ exports.queryDB = function(queryData, searchParams, callback) {
 		password: ''
 	});
 
-	connection.query('USE books_db');
+	var mLocalSettings = require('../local_settings/localSettings');
+	connection.query('USE ' + mLocalSettings.GetNameDB());
 
 
 	// Calculate limits
@@ -311,14 +315,17 @@ exports.queryDB = function(queryData, searchParams, callback) {
 
 	console.log('SQL: ' + queryStr);
 
-	connection.query(queryStr, 
+	var options = {sql: queryStr, nestTables: true};
+	connection.query(options, 
     function(err, results, fields) {
 		//console.log(results); console.log(fields);
 		if (err) throw err;
 
+		console.log("===== results ===="); console.log(results);
 		// update result fileds with selected display names and extra table params
 		updateFields(fields, queryData);
 		//console.log("FIELDS"); console.log(fields);
+
 		callback(results, fields, "QueryDB finished. Callback done");
 	});
 };
@@ -336,14 +343,31 @@ exports.test = function(queryData, searchParams, callback) {
 		password: ''
 	});
 
-	connection.query('USE books_db');
+	var mLocalSettings = require('../local_settings/localSettings');
+	connection.query('USE ' + mLocalSettings.GetNameDB());
 
 	// Build query string
-	var queryStr =  "SELECT * FROM books;"
+	var queryStr =  "SELECT \
+    b.id, b.asin, b.title, b.origin_id, o.name, p.name, l.name, g.name, rl.name, a.id, a.name\
+  FROM \
+    books b\
+    INNER JOIN authors_books ON b.id = authors_books.book_id\
+    INNER JOIN authors a ON authors_books.author_id = a.id \
+    LEFT JOIN origins o ON b.origin_id = o.id\
+    LEFT JOIN publishers p ON b.publisher_id = p.id\
+    LEFT JOIN languages l ON b.language_id = l.id\
+    LEFT JOIN genres g ON b.genre_id = g.id\
+    LEFT JOIN read_levels rl ON b.read_level_id = rl.id\
+  WHERE\
+    l.name = \"Ewe\"\
+  ORDER BY\
+    title ASC";
+
+    var options = {sql: queryStr, nestTables: true};
 
 	console.log('SQL: ' + queryStr);
 
-	connection.query(queryStr, 
+	connection.query(options, 
     function(err, results, fields) {
 		//console.log(results); console.log(fields);
 		if (err) throw err;
@@ -356,3 +380,93 @@ exports.test = function(queryData, searchParams, callback) {
 	});
 };
 
+// --------------------------------------------------------------
+// * queryData will include the drop-menu selections, the search bar and
+// the current page (pagination)
+exports.mainBrowseQuery = function(queryData, callback) {
+    console.log('=============> mainBrowseQuery');
+    
+    // Connect to db
+    var mysql = require('mysql');
+
+	var connection = mysql.createConnection({
+		host: 'localhost',
+		user: 'root',
+		password: ''
+	});
+
+	var mLocalSettings = require('../local_settings/localSettings');
+	connection.query('USE ' + mLocalSettings.GetNameDB());
+
+	// Build query string
+	var queryStr =  "SELECT \
+    		books.id, books.asin, books.title, origins.name, publishers.name, languages.name, genres.name, read_levels.name, authors.name\
+  		FROM \
+  			books \
+		    INNER JOIN authors_books ON books.id = authors_books.book_id\
+		    INNER JOIN authors ON authors_books.author_id = authors.id \
+		    LEFT JOIN origins ON books.origin_id = origins.id\
+		    LEFT JOIN publishers ON books.publisher_id = publishers.id\
+		    LEFT JOIN languages ON books.language_id = languages.id\
+		    LEFT JOIN genres ON books.genre_id = genres.id\
+		    LEFT JOIN read_levels ON books.read_level_id = read_levels.id\
+		WHERE\
+		   languages.name='English' \
+		ORDER BY\
+			books.title ASC;"
+
+	console.log('SQL: ' + queryStr);
+    
+    var options = {sql: queryStr, nestTables: true};
+	connection.query(options, 
+    function(err, results, fields) {
+		//console.log(results); console.log(fields);
+		if (err) throw err;
+
+		// update result fileds with selected display names and extra table params
+		console.log(results);
+
+		//console.log("FIELDS"); console.log(fields);
+		callback(results, fields, "mainBrowseQuery finished. Callback done");
+	});
+};
+
+// -----------------------------------------------------------------
+// APP_BROWSE_FILTERS
+// -----------------------------------------------------------------
+
+// ----------------------------------------------------------
+// Params: searchParams
+// IN:  tableName
+
+exports.selectAll = function(tableName, callback) {
+    console.log('==========> select ALL from ' + tableName);
+
+ // Connect to db
+    var mysql = require('mysql');
+
+	var connection = mysql.createConnection({
+		host: 'localhost',
+		user: 'root',
+		password: ''
+	});
+
+	var mLocalSettings = require('../local_settings/localSettings');
+	connection.query('USE ' + mLocalSettings.GetNameDB());
+
+	// request the seleted user
+	var query = "SELECT * FROM " + tableName;
+	console.log("SQL:" + query);
+	connection.query(query, 
+    function(err, results, fields) {
+		//console.log(results);
+		//console.log(fields);
+		if (err) throw err;
+		console.log("selectAll returned " + results.length + " elements");
+		callback(err, results, fields);
+		return;
+      }
+	);
+
+	
+}

@@ -25,6 +25,23 @@ exports.show = function(req, res){
 	
 	console.log(msg);
 
+
+	// db access methods
+    var dbAccess = require('../modules/db-access');
+
+	dbAccess.test("","", 
+		function(res, fields, txt) {
+			console.log("CALLBACK_TEXT: " + txt)
+			console.log("Hurray! there are results:");
+			console.log(res);
+			}
+	);
+
+
+
+
+
+
 	req.session.user = null;
 	console.log(req.session);
 	res.render('login.ejs' , {title: 'Loging', msg: msg, pos: {'x': -130, 'y': -150}});
@@ -48,7 +65,7 @@ exports.post = function(req, res){
 			req.session.user = user;
 			req.session.reange = { from: 0, to: -1 };
 			console.log(req.session);
-			res.redirect('/queryDb');
+			res.redirect('/portal');
 		}
 		else
 		{
